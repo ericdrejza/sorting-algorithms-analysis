@@ -16,6 +16,6 @@ def bubblesort(array):
             # if the previous value is less that the next value, swap
             if array[i] > array [i + 1]:
                 # swap the values at these indices
-                array[i],array[i + 1] = array[i + 1], array[i]
+                array[i], array[i + 1] = array[i + 1], array[i]
                 # set flag as swapped
                 swapped = True
