@@ -31,7 +31,7 @@ def mergesort_insertion(array):
         # merge
         merge(array, left, right)
     else:
-        insertionSort(array)
+        insertion_sort(array)
 
 
 def merge(array, left, right):
