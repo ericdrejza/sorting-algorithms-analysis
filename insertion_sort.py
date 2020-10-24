@@ -1,4 +1,3 @@
-from copy import deepcopy
 # Python Insertion Sort Implementation
 
 def insertion_sort(array):
