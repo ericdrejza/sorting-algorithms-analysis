@@ -5,6 +5,7 @@ from array_producer import randArray
 from bubblesort import bubblesort
 from insertion_sort import insertion_sort
 from selection_sort import selection_sort
+from mergesort import mergesort
 
 #************** ARGUMENTS ******************
 parser = argparse.ArgumentParser(description='Sorting Algorithms')
@@ -161,7 +162,8 @@ if args.all_sorts or args.tests:
     
     # Mergesort
     a = randArray(NUM_ELEMENTS_TEST, LOWER_BOUND_TEST, UPPER_BOUND_TEST)
-    # TODO: Add Mergesort call
+    sort_and_time(a, mergesort, PRINT_TEST)
+    print(a)
     
     # Modified Mergesort (Insertion at array size <= 8)
     a = randArray(NUM_ELEMENTS_TEST, LOWER_BOUND_TEST, UPPER_BOUND_TEST)
