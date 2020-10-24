@@ -5,7 +5,7 @@ from array_producer import randArray
 from bubblesort import bubblesort
 from insertion_sort import insertion_sort
 from selection_sort import selection_sort
-from mergesort import mergesort
+from mergesort import mergesort, mergesort_insertion
 
 #************** ARGUMENTS ******************
 parser = argparse.ArgumentParser(description='Sorting Algorithms')
@@ -135,7 +135,7 @@ if args.all_sorts or args.tests:
     print("Runtime of each sort algorithm on a random array:\n")
     
     # Variables
-    NUM_ELEMENTS_TEST = 10
+    NUM_ELEMENTS_TEST = 100
     LOWER_BOUND_TEST = 0
     UPPER_BOUND_TEST = NUM_ELEMENTS_TEST * 10 - 1
     PRINT_TEST = True
@@ -148,26 +148,27 @@ if args.all_sorts or args.tests:
     # Bubblesort
     a = randArray(NUM_ELEMENTS_TEST, LOWER_BOUND_TEST, UPPER_BOUND_TEST)
     sort_and_time(a, bubblesort, PRINT_TEST)
-    print(a)
+    print(str(a) + "\n")
     
     # Insertion sort
     a = randArray(NUM_ELEMENTS_TEST, LOWER_BOUND_TEST, UPPER_BOUND_TEST)
     sort_and_time(a, insertion_sort, PRINT_TEST)
-    print(a)
-    
+    print(str(a) + "\n")
+
     # Selection Sort
     a = randArray(NUM_ELEMENTS_TEST, LOWER_BOUND_TEST, UPPER_BOUND_TEST)
     sort_and_time(a, selection_sort, PRINT_TEST)
-    print(a)
+    print(str(a) + "\n")
     
     # Mergesort
     a = randArray(NUM_ELEMENTS_TEST, LOWER_BOUND_TEST, UPPER_BOUND_TEST)
     sort_and_time(a, mergesort, PRINT_TEST)
-    print(a)
+    print(str(a) + "\n")
     
     # Modified Mergesort (Insertion at array size <= 8)
     a = randArray(NUM_ELEMENTS_TEST, LOWER_BOUND_TEST, UPPER_BOUND_TEST)
-    # TODO: Add Modified Mergesort call
+    sort_and_time(a, mergesort_insertion, PRINT_TEST)
+    print(str(a) + "\n")
     
     # Heapsort
     a = randArray(NUM_ELEMENTS_TEST, LOWER_BOUND_TEST, UPPER_BOUND_TEST)
