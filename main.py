@@ -6,6 +6,7 @@ from bubblesort import bubblesort
 from insertion_sort import insertion_sort
 from selection_sort import selection_sort
 from mergesort import mergesort, mergesort_insertion
+from heapsort import heapsort
 
 #************** ARGUMENTS ******************
 parser = argparse.ArgumentParser(description='Sorting Algorithms')
@@ -135,7 +136,7 @@ if args.all_sorts or args.tests:
     print("Runtime of each sort algorithm on a random array:\n")
     
     # Variables
-    NUM_ELEMENTS_TEST = 100
+    NUM_ELEMENTS_TEST = 10
     LOWER_BOUND_TEST = 0
     UPPER_BOUND_TEST = NUM_ELEMENTS_TEST * 10 - 1
     PRINT_TEST = True
@@ -172,7 +173,8 @@ if args.all_sorts or args.tests:
     
     # Heapsort
     a = randArray(NUM_ELEMENTS_TEST, LOWER_BOUND_TEST, UPPER_BOUND_TEST)
-    # TODO: Add Heapsort call
+    sort_and_time(a, heapsort, PRINT_TEST)
+    print(str(a) + "\n")
     
     # BST Sort
     a = randArray(NUM_ELEMENTS_TEST, LOWER_BOUND_TEST, UPPER_BOUND_TEST)
