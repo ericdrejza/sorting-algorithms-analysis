@@ -47,8 +47,7 @@ def avg_rand_array_sort_and_time(sort_func, num_elements, reps, lowerBound, uppe
         average += sort_and_time(a, sort_func, False)
     average = average / reps
     average_milliseconds = average.microseconds/1000
-    print((str(sort_func).split()[1] + "(Average Runtime in Milliseconds): ").ljust(LJUST_SPACING - len(str(average.microseconds).split('.')[0]), ' ') + \
-        runtime_string(average_milliseconds) + "ms")
+    print(runtime_string(average_milliseconds, sort_func))
     return average
 
 def avg_sorted_array_sort_and_time(sort_func, num_elements, reps):
@@ -58,8 +57,7 @@ def avg_sorted_array_sort_and_time(sort_func, num_elements, reps):
         average += sort_and_time(a, sort_func, False)
     average = average / reps
     average_milliseconds = average.microseconds/1000
-    print((str(sort_func).split()[1] + "(Average Runtime in Milliseconds): ").ljust(LJUST_SPACING - len(str(average.microseconds).split('.')[0]), ' ') + \
-        runtime_string(average_milliseconds) + "ms")
+    print(runtime_string(average_milliseconds, sort_func))
     return average
 
 def avg_half_sorted_array_sort_and_time(sort_func, num_elements, reps, upperBound):
@@ -70,19 +68,19 @@ def avg_half_sorted_array_sort_and_time(sort_func, num_elements, reps, upperBoun
         randHalf(a, upperBound)
     average = average / reps
     average_milliseconds = average.microseconds/1000
-    print((str(sort_func).split()[1] + "(Average Runtime in Milliseconds): ").ljust(LJUST_SPACING - len(str(average.microseconds).split('.')[0]), ' ') + \
-        runtime_string(average_milliseconds) + "ms")
+    print(runtime_string(average_milliseconds, sort_func))
     return average
 
-def runtime_string(milliseconds):
-    return str(milliseconds).split('.')[0] + '.' + str(milliseconds).split('.')[1].ljust(3, '0')
+def runtime_string(milliseconds , sort_func):
+    return (str(sort_func).split()[1] + ' ' + "(Average Runtime in Milliseconds): ").ljust(LJUST_SPACING - len(str(milliseconds).split('.')[0]), ' ') + \
+        str(milliseconds).split('.')[0] + '.' + str(milliseconds).split('.')[1].ljust(3, '0') + "ms"
 
 
 #************** RANDOM ARRAY SORT CALLS ******************
 if args.all_sorts or args.averages:
     # Find the averages of the various sorting algorithms
     print("\n".ljust(80, '-'))
-    print("Average Runtime of Each Sorting Algorithm:\n")
+    print("Average Runtime of Each Sorting Algorithm Using Random Arrays:\n")
 
     # Variables
     NUM_ELEMENTS = 1000
