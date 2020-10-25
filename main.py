@@ -88,6 +88,11 @@ def runtime_string(milliseconds , sort_func):
     return (str(sort_func).split()[1] + ' ' + "(Average Runtime in Milliseconds): ").ljust(LJUST_SPACING - len(str(milliseconds).split('.')[0]), ' ') + \
         str(milliseconds).split('.')[0] + '.' + str(milliseconds).split('.')[1].ljust(3, '0') + "ms"
 
+def isSorted(array):
+    for i in range(len(array)-1):
+        if array[i] > array[i+1]:
+            return False
+    return True
 
 #************** RANDOM ARRAY SORT CALLS ******************
 if args.all_sorts or args.random:
@@ -243,7 +248,7 @@ if args.tests:
     print("Runtime of each sort algorithm on a random array:\n")
     
     # Variables
-    NUM_ELEMENTS_TEST = 10
+    NUM_ELEMENTS_TEST = 10000
     LOWER_BOUND_TEST = 0
     UPPER_BOUND_TEST = NUM_ELEMENTS_TEST * 10 - 1
     PRINT_TEST = True
@@ -256,42 +261,42 @@ if args.tests:
     # Bubblesort
     a = randArray(NUM_ELEMENTS_TEST, LOWER_BOUND_TEST, UPPER_BOUND_TEST)
     sort_and_time(a, bubblesort, PRINT_TEST)
-    print(str(a) + "\n")
+    print("Is sorted: " + str(isSorted(a)))
     
     # Insertion sort
     a = randArray(NUM_ELEMENTS_TEST, LOWER_BOUND_TEST, UPPER_BOUND_TEST)
     sort_and_time(a, insertion_sort, PRINT_TEST)
-    print(str(a) + "\n")
+    print("Is sorted: " + str(isSorted(a)))
 
     # Selection Sort
     a = randArray(NUM_ELEMENTS_TEST, LOWER_BOUND_TEST, UPPER_BOUND_TEST)
     sort_and_time(a, selection_sort, PRINT_TEST)
-    print(str(a) + "\n")
+    print("Is sorted: " + str(isSorted(a)))
     
     # Mergesort
     a = randArray(NUM_ELEMENTS_TEST, LOWER_BOUND_TEST, UPPER_BOUND_TEST)
     sort_and_time(a, mergesort, PRINT_TEST)
-    print(str(a) + "\n")
+    print("Is sorted: " + str(isSorted(a)))
     
     # Modified Mergesort (Insertion at array size <= 8)
     a = randArray(NUM_ELEMENTS_TEST, LOWER_BOUND_TEST, UPPER_BOUND_TEST)
     sort_and_time(a, mergesort_insertion, PRINT_TEST)
-    print(str(a) + "\n")
+    print("Is sorted: " + str(isSorted(a)))
     
     # Heapsort
     a = randArray(NUM_ELEMENTS_TEST, LOWER_BOUND_TEST, UPPER_BOUND_TEST)
     sort_and_time(a, heapsort, PRINT_TEST)
-    print(str(a) + "\n")
+    print("Is sorted: " + str(isSorted(a)))
     
     # BST Sort
     a = randArray(NUM_ELEMENTS_TEST, LOWER_BOUND_TEST, UPPER_BOUND_TEST)
     sort_and_time(a, bst_sort, PRINT_TEST)
-    print(str(a) + "\n")
+    print("Is sorted: " + str(isSorted(a)))
     
     # LLRB Sort
     a = randArray(NUM_ELEMENTS_TEST, LOWER_BOUND_TEST, UPPER_BOUND_TEST)
     sort_and_time(a, leftrb_sort, PRINT_TEST)
-    print(str(a) + "\n")\
+    print("Is sorted: " + str(isSorted(a)))\
     
 if args.full_run:
 
@@ -307,7 +312,7 @@ if args.full_run:
     sys.setrecursionlimit(10**6)
 
     sorts = (bubblesort, insertion_sort, selection_sort, mergesort, mergesort_insertion, heapsort, bst_sort, leftrb_sort)
-    sizes = (10, 100, 1000, 10000, 10000)
+    sizes = (10, 100, 1000, 10000)
     array_types = (avg_rand_array_sort_and_time, avg_sorted_array_sort_and_time, avg_half_sorted_array_sort_and_time)
 
     # (str(sort_func).split()[1] + ' ' + "(Average Runtime in Milliseconds): ").ljust(LJUST_SPACING - len(str(milliseconds).split('.')[0]), ' ') + \
