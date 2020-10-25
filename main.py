@@ -22,7 +22,6 @@ parser.add_argument('-t', '--tests', dest='tests', action='store_const',
                     const=True, default=False)
 
 args = parser.parse_args()
-print(args)
 
 if len(sys.argv) == 1:
     args.all_sorts = True
@@ -36,7 +35,7 @@ def sort_and_time(array, sort_func, will_print):
         print(str(sort_func).split()[1] + "(Runtime in Milliseconds): " + str(elapsed.microseconds/1000) + " ms")
     return elapsed
 
-def avg_sort_and_time(sort_func, reps, num_elements, lowerBound, upperBound):
+def avg_rand_array_sort_and_time(sort_func, num_elements, reps, lowerBound, upperBound):
     average = datetime.min - datetime.min
     for i in range(reps):
         a = randArray(num_elements, lowerBound, upperBound)
@@ -44,49 +43,60 @@ def avg_sort_and_time(sort_func, reps, num_elements, lowerBound, upperBound):
     average = average / reps
     # print(str(sort_func).split()[1] + "(Average): " + str(average)[2:])
     print(str(sort_func).split()[1] + "(Average Runtime in Milliseconds): " + str(average.microseconds/1000) + "ms")
+    return average
+
+def avg_sorted_array_sort_and_time(sort_func, num_elements, reps):
+    average = datetime.min - datetime.min
+    for i in range(reps):
+        a = list(range(num_elements))
+        average += sort_and_time(a, sort_func, False)
+    average = average / reps
+    # print(str(sort_func).split()[1] + "(Average): " + str(average)[2:])
+    print(str(sort_func).split()[1] + "(Average Runtime in Milliseconds): " + str(average.microseconds/1000) + "ms")
+    return average
 
 
 
-#************** AVERAGES OF SORT CALLS ******************
+#************** RANDOM ARRAY SORT CALLS ******************
 if args.all_sorts or args.averages:
     # Find the averages of the various sorting algorithms
     print("\n".ljust(80, '-'))
     print("Average Runtime of Each Sorting Algorithm:\n")
 
     # Variables
+    NUM_ELEMENTS = 10000
     REPS = 10
-    NUM_ELEMENTS = 1000
     LOWER_BOUND = 0
     UPPER_BOUND = NUM_ELEMENTS * 10 - 1
 
     # Print values of the variables
-    print("Repitions per algorithm: " + str(REPS))
     print("Number of elements in array: " + str(NUM_ELEMENTS))
+    print("Repitions per algorithm: " + str(REPS))
     print("Lower Bound: " + str(LOWER_BOUND) + "; Upper Bound: " + str(UPPER_BOUND) + "\n")
 
     # Bubblesort
-    avg_sort_and_time(bubblesort, REPS, NUM_ELEMENTS, LOWER_BOUND, UPPER_BOUND)
+    avg_rand_array_sort_and_time(bubblesort, NUM_ELEMENTS, REPS, LOWER_BOUND, UPPER_BOUND)
 
     # Insertion sort
-    avg_sort_and_time(insertion_sort, REPS, NUM_ELEMENTS, LOWER_BOUND, UPPER_BOUND)
+    avg_rand_array_sort_and_time(insertion_sort, NUM_ELEMENTS, REPS, LOWER_BOUND, UPPER_BOUND)
 
     # Selection Sort
-    avg_sort_and_time(selection_sort, REPS, NUM_ELEMENTS, LOWER_BOUND, UPPER_BOUND)
+    avg_rand_array_sort_and_time(selection_sort, NUM_ELEMENTS, REPS, LOWER_BOUND, UPPER_BOUND)
 
     # Mergesort
-    # TODO: Add Mergesort call
+    avg_rand_array_sort_and_time(mergesort, NUM_ELEMENTS, REPS, LOWER_BOUND, UPPER_BOUND)
 
     # Modified Mergesort (Insertion at array size <= 8)
-    # TODO: Add Modified Mergesort call
+    avg_rand_array_sort_and_time(mergesort_insertion, NUM_ELEMENTS, REPS, LOWER_BOUND, UPPER_BOUND)
 
     # Heapsort
-    # TODO: Add Heapsort call
+    avg_rand_array_sort_and_time(heapsort, NUM_ELEMENTS, REPS, LOWER_BOUND, UPPER_BOUND)
 
     # BST Sort
-    # TODO: Add BST sort call
+    avg_rand_array_sort_and_time(bst_sort, NUM_ELEMENTS, REPS, LOWER_BOUND, UPPER_BOUND)
 
     # LLRB Sort
-    # TODO: Add LLRB sort call
+    avg_rand_array_sort_and_time(leftrb_sort, NUM_ELEMENTS, REPS, LOWER_BOUND, UPPER_BOUND)
 
 
 #************** SORTED ARRAY SORT CALLS ******************
@@ -95,40 +105,41 @@ if args.all_sorts or args.sorted_sorts:
     print("Runtime of Each Sorting Algorithm Using Sorted Arrays:\n")
 
     # Variables
-    NUM_ELEMENTS_SORTED = 500
-    LOWER_BOUND_SORTED = 0
-    UPPER_BOUND_SORTED = NUM_ELEMENTS_SORTED * 10 - 1
+    NUM_ELEMENTS_SORTED = 10000
+    REPS_SORTED = 10
     PRINT_SORTED = True
+
+    sys.setrecursionlimit(10**6)
 
     # Print values of the variables
     print("Number of elements in array: " + str(NUM_ELEMENTS_SORTED))
-    print("Lower Bound: " + str(LOWER_BOUND_SORTED) + "; Upper Bound: " + str(UPPER_BOUND_SORTED) + "\n")
+    print("Repitions per algorithm: " + str(REPS_SORTED) + "\n")
 
     a = list(range(0, NUM_ELEMENTS_SORTED))
 
     # Bubblesort
-    sort_and_time(a, bubblesort, PRINT_SORTED)
+    avg_sorted_array_sort_and_time(bubblesort, NUM_ELEMENTS_SORTED, REPS_SORTED)
 
     # Insertion sort
-    sort_and_time(a, insertion_sort, PRINT_SORTED)
+    avg_sorted_array_sort_and_time(insertion_sort, NUM_ELEMENTS_SORTED, REPS_SORTED)
 
     # Selection Sort
-    sort_and_time(a, selection_sort, PRINT_SORTED)
+    avg_sorted_array_sort_and_time(selection_sort, NUM_ELEMENTS_SORTED, REPS_SORTED)
 
     # Mergesort
-    # TODO: Add Mergesort call
+    avg_sorted_array_sort_and_time(mergesort, NUM_ELEMENTS_SORTED, REPS_SORTED)
 
     # Modified Mergesort (Insertion at array size <= 8)
-    # TODO: Add Modified Mergesort call
+    avg_sorted_array_sort_and_time(mergesort_insertion, NUM_ELEMENTS_SORTED, REPS_SORTED)
 
     # Heapsort
-    # TODO: Add Heapsort call
+    avg_sorted_array_sort_and_time(heapsort, NUM_ELEMENTS_SORTED, REPS_SORTED)
 
     # BST Sort
-    # TODO: Add BST sort call
+    avg_sorted_array_sort_and_time(bst_sort, NUM_ELEMENTS_SORTED, REPS_SORTED)
 
     # LLRB Sort
-    # TODO: Add LLRB sort call
+    avg_sorted_array_sort_and_time(leftrb_sort, NUM_ELEMENTS_SORTED, REPS_SORTED)
 
 
 
