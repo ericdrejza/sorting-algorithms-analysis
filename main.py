@@ -194,7 +194,7 @@ if args.all_sorts or args.sorted_sorts:
 
     # Variables
     if args.num_elements == None:
-        NUM_ELEMENTS_SORTED = 100
+        NUM_ELEMENTS_SORTED = 1000
     else:
         NUM_ELEMENTS_SORTED = args.num_elements
 
