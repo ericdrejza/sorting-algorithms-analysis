@@ -95,7 +95,10 @@ if args.all_sorts or args.random:
     else:
         NUM_ELEMENTS = args.num_elements
         
-    REPS = 10
+    if args.num_reps == None:
+        REPS = 10
+    else:
+        REPS = args.num_reps
     LOWER_BOUND = 0
     UPPER_BOUND = NUM_ELEMENTS * 10 - 1
 
@@ -139,7 +142,11 @@ if args.all_sorts or args.sorted_sorts:
         NUM_ELEMENTS_SORTED = 100
     else:
         NUM_ELEMENTS_SORTED = args.num_elements
-    REPS_SORTED = 10
+
+    if args.num_reps == None:
+        REPS_SORTED = 10
+    else:
+        REPS_SORTED = args.num_reps
     PRINT_SORTED = True
 
     sys.setrecursionlimit(10**6)
@@ -186,7 +193,12 @@ if args.all_sorts or args.half_sorted_sorts:
         NUM_ELEMENTS_HALF_SORTED = 1000
     else:
         NUM_ELEMENTS_HALF_SORTED = args.num_elements
-    REPS_HALF_SORTED = 10
+
+    if args.num_reps == None:
+        REPS_HALF_SORTED = 10
+    else:
+        REPS_HALF_SORTED = args.num_reps
+
     UPPER_BOUND_HALF_SORTED = NUM_ELEMENTS_HALF_SORTED * 10 - 1
 
     # Print values of the variables
@@ -275,4 +287,55 @@ if args.tests:
     sort_and_time(a, leftrb_sort, PRINT_TEST)
     print(str(a) + "\n")\
     
-# if args.full_run:
+if args.full_run:
+
+    # Variables
+    if args.num_reps == None:
+        REPS_FULL = 10
+    else:
+        REPS_FULL = args.num_reps
+    LOWER_BOUND_FULL = 0
+    
+    sys.setrecursionlimit(10**6)
+
+    sorts = (bubblesort, insertion_sort, selection_sort, mergesort, mergesort_insertion, heapsort, bst_sort, leftrb_sort)
+    sizes = (10, 100, 1000)
+    array_types = (avg_rand_array_sort_and_time, avg_sorted_array_sort_and_time, avg_half_sorted_array_sort_and_time)
+
+    # (str(sort_func).split()[1] + ' ' + "(Average Runtime in Milliseconds): ").ljust(LJUST_SPACING - len(str(milliseconds).split('.')[0]), ' ') + \
+    #     str(milliseconds).split('.')[0] + '.' + str(milliseconds).split('.')[1].ljust(3, '0') + "ms"
+
+    SIZE_LJUST = len("SIZE") + 10
+    RAND_ARRAY_LJUST = len("RANDOM") + 10
+    HALF_SORTED_ARRAY_LJUST = len("HALF")+ 10
+    SORTED_ARRAY_LJUST = len("SORTED") + 10
+
+    for sort in sorts:
+        print(str(sort).split()[1] + ":\n" + \
+            "SIZE".ljust(SIZE_LJUST) + "RANDOM".ljust(RAND_ARRAY_LJUST) + \
+                "HALF".ljust(HALF_SORTED_ARRAY_LJUST) + "SORTED".ljust(SORTED_ARRAY_LJUST))
+
+        for size in sizes:
+            UPPER_BOUND_FULL = size * 10 -1
+
+            string = (str(size) + ": ").ljust(SIZE_LJUST)
+
+            # RANDOM ARRAY
+            milliseconds = avg_rand_array_sort_and_time(sort, size, REPS_FULL, LOWER_BOUND_FULL, UPPER_BOUND_FULL)[0]
+            # print(milliseconds)
+            string = string + (str(milliseconds).split('.')[0] + '.' + str(milliseconds).split('.')[1].ljust(3, '0') + ' ').ljust(RAND_ARRAY_LJUST)
+            
+            # HALF SORTED
+            milliseconds  = avg_half_sorted_array_sort_and_time(sort, size, REPS_FULL, UPPER_BOUND_FULL)[0]
+            # print(milliseconds)
+            string = string + (str(milliseconds).split('.')[0] + '.' + str(milliseconds).split('.')[1].ljust(3, '0') + ' ').ljust(HALF_SORTED_ARRAY_LJUST)
+            
+            # SORTED
+            milliseconds = avg_sorted_array_sort_and_time(sort, size, REPS_FULL)[0]
+            # print(milliseconds)
+            string = string + (str(milliseconds).split('.')[0] + '.' + str(milliseconds).split('.')[1].ljust(3, '0')).ljust(SORTED_ARRAY_LJUST)
+
+            print(string)
+        
+        print()
+            
