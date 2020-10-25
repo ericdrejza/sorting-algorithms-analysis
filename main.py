@@ -30,7 +30,7 @@ parser.add_argument('-s', '--sorted', dest='sorted_sorts', action='store_const',
                     help='Find the average runtimes for each sorting algorithm on sorted arrays of the specified size')
 parser.add_argument('-t', '--tests', dest='tests', action='store_const',
                     const=True, default=False,
-                    help='Get runtimes for each sorting algorithm on random arrays of the specified size and see the sorted array')
+                    help='Get runtimes for each sorting algorithm on random arrays of the specified size and check if the array is sorted')
 
 parser.add_argument('-n', '--num_elements', metavar='N', dest='num_elements', type=int,
                     help='Set the number of elements in the list')
