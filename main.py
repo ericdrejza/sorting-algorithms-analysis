@@ -14,7 +14,7 @@ from leftrb.llrb import leftrb_sort
 #************** ARGUMENTS ******************
 parser = argparse.ArgumentParser(description='Sorting Algorithms')
 parser.add_argument('-a', '--all', dest='all_sorts', action='store_const',
-                    const=True, default=False, help='Run all array types on all sorting algorithms',
+                    const=True, default=False,
                     help='Run all sorting algorithms on all array types (random, half sorted, and sorted) and get their average runtimes for specified array sizes')
 parser.add_argument('-r', '--rand', '--random', dest='random', action='store_const',
                     const=True, default=False,
@@ -23,7 +23,7 @@ parser.add_argument('-f', '--full', '--full-run', dest='full_run', action='store
                     const=True, default=False,
                     help='Find the average runtimes for each sorting algorithm on each type of array (random, half sorted, sorted) for various sizes (10, 100, 1000, 10000)')
 parser.add_argument('--hs', '--half-sorted', dest='half_sorted_sorts', action='store_const',
-                    const=True, default=False
+                    const=True, default=False,
                     help='Find the average runtimes for each sorting algorithm on half sorted arrays of the specified size')
 parser.add_argument('-s', '--sorted', dest='sorted_sorts', action='store_const',
                     const=True, default=False,
@@ -138,6 +138,55 @@ if args.all_sorts or args.random:
     print(avg_rand_array_sort_and_time(leftrb_sort, NUM_ELEMENTS, REPS, LOWER_BOUND, UPPER_BOUND)[1])
 
 
+#************** HALF SORTED ARRAY SORT CALLS ******************
+if args.all_sorts or args.half_sorted_sorts:
+    # Find the averages of the various sorting algorithms
+    print("\n".ljust(80, '-'))
+    print("Average Runtime of Each Sorting Algorithm Using Half Sorted Arrays:\n")
+
+    # Variables
+    if args.num_elements == None:
+        NUM_ELEMENTS_HALF_SORTED = 1000
+    else:
+        NUM_ELEMENTS_HALF_SORTED = args.num_elements
+
+    if args.num_reps == None:
+        REPS_HALF_SORTED = 10
+    else:
+        REPS_HALF_SORTED = args.num_reps
+
+    UPPER_BOUND_HALF_SORTED = NUM_ELEMENTS_HALF_SORTED * 10 - 1
+
+    # Print values of the variables
+    print("Number of elements in array: " + str(NUM_ELEMENTS_HALF_SORTED))
+    print("Repitions per algorithm: " + str(REPS_HALF_SORTED))
+    print("Upper Bound: " + str(UPPER_BOUND_HALF_SORTED) + "\n")
+
+    # Bubblesort
+    print(avg_half_sorted_array_sort_and_time(bubblesort, NUM_ELEMENTS_HALF_SORTED, REPS_HALF_SORTED, UPPER_BOUND_HALF_SORTED)[1])
+
+    # Insertion sort
+    print(avg_half_sorted_array_sort_and_time(insertion_sort, NUM_ELEMENTS_HALF_SORTED, REPS_HALF_SORTED, UPPER_BOUND_HALF_SORTED)[1])
+
+    # Selection Sort
+    print(avg_half_sorted_array_sort_and_time(selection_sort, NUM_ELEMENTS_HALF_SORTED, REPS_HALF_SORTED, UPPER_BOUND_HALF_SORTED)[1])
+
+    # Mergesort
+    print(avg_half_sorted_array_sort_and_time(mergesort, NUM_ELEMENTS_HALF_SORTED, REPS_HALF_SORTED, UPPER_BOUND_HALF_SORTED)[1])
+
+    # Modified Mergesort (Insertion at array size <= 8)
+    print(avg_half_sorted_array_sort_and_time(mergesort_insertion, NUM_ELEMENTS_HALF_SORTED, REPS_HALF_SORTED, UPPER_BOUND_HALF_SORTED)[1])
+
+    # Heapsort
+    print(avg_half_sorted_array_sort_and_time(heapsort, NUM_ELEMENTS_HALF_SORTED, REPS_HALF_SORTED, UPPER_BOUND_HALF_SORTED)[1])
+
+    # BST Sort
+    print(avg_half_sorted_array_sort_and_time(bst_sort, NUM_ELEMENTS_HALF_SORTED, REPS_HALF_SORTED, UPPER_BOUND_HALF_SORTED)[1])
+
+    # LLRB Sort
+    print(avg_half_sorted_array_sort_and_time(leftrb_sort, NUM_ELEMENTS_HALF_SORTED, REPS_HALF_SORTED, UPPER_BOUND_HALF_SORTED)[1])
+
+
 #************** SORTED ARRAY SORT CALLS ******************
 if args.all_sorts or args.sorted_sorts:
     print("\n".ljust(80, '-'))
@@ -186,55 +235,6 @@ if args.all_sorts or args.sorted_sorts:
 
     # LLRB Sort
     print(avg_sorted_array_sort_and_time(leftrb_sort, NUM_ELEMENTS_SORTED, REPS_SORTED)[1])
-
-
-#************** HALF SORTED ARRAY SORT CALLS ******************
-if args.all_sorts or args.half_sorted_sorts:
-    # Find the averages of the various sorting algorithms
-    print("\n".ljust(80, '-'))
-    print("Average Runtime of Each Sorting Algorithm Using Half Sorted Arrays:\n")
-
-    # Variables
-    if args.num_elements == None:
-        NUM_ELEMENTS_HALF_SORTED = 1000
-    else:
-        NUM_ELEMENTS_HALF_SORTED = args.num_elements
-
-    if args.num_reps == None:
-        REPS_HALF_SORTED = 10
-    else:
-        REPS_HALF_SORTED = args.num_reps
-
-    UPPER_BOUND_HALF_SORTED = NUM_ELEMENTS_HALF_SORTED * 10 - 1
-
-    # Print values of the variables
-    print("Number of elements in array: " + str(NUM_ELEMENTS_HALF_SORTED))
-    print("Repitions per algorithm: " + str(REPS_HALF_SORTED))
-    print("Upper Bound: " + str(UPPER_BOUND_HALF_SORTED) + "\n")
-
-    # Bubblesort
-    print(avg_half_sorted_array_sort_and_time(bubblesort, NUM_ELEMENTS_HALF_SORTED, REPS_HALF_SORTED, UPPER_BOUND_HALF_SORTED)[1])
-
-    # Insertion sort
-    print(avg_half_sorted_array_sort_and_time(insertion_sort, NUM_ELEMENTS_HALF_SORTED, REPS_HALF_SORTED, UPPER_BOUND_HALF_SORTED)[1])
-
-    # Selection Sort
-    print(avg_half_sorted_array_sort_and_time(selection_sort, NUM_ELEMENTS_HALF_SORTED, REPS_HALF_SORTED, UPPER_BOUND_HALF_SORTED)[1])
-
-    # Mergesort
-    print(avg_half_sorted_array_sort_and_time(mergesort, NUM_ELEMENTS_HALF_SORTED, REPS_HALF_SORTED, UPPER_BOUND_HALF_SORTED)[1])
-
-    # Modified Mergesort (Insertion at array size <= 8)
-    print(avg_half_sorted_array_sort_and_time(mergesort_insertion, NUM_ELEMENTS_HALF_SORTED, REPS_HALF_SORTED, UPPER_BOUND_HALF_SORTED)[1])
-
-    # Heapsort
-    print(avg_half_sorted_array_sort_and_time(heapsort, NUM_ELEMENTS_HALF_SORTED, REPS_HALF_SORTED, UPPER_BOUND_HALF_SORTED)[1])
-
-    # BST Sort
-    print(avg_half_sorted_array_sort_and_time(bst_sort, NUM_ELEMENTS_HALF_SORTED, REPS_HALF_SORTED, UPPER_BOUND_HALF_SORTED)[1])
-
-    # LLRB Sort
-    print(avg_half_sorted_array_sort_and_time(leftrb_sort, NUM_ELEMENTS_HALF_SORTED, REPS_HALF_SORTED, UPPER_BOUND_HALF_SORTED)[1])
 
 
 #*********** TESTS **************
@@ -307,7 +307,7 @@ if args.full_run:
     sys.setrecursionlimit(10**6)
 
     sorts = (bubblesort, insertion_sort, selection_sort, mergesort, mergesort_insertion, heapsort, bst_sort, leftrb_sort)
-    sizes = (10, 100, 1000)
+    sizes = (10, 100, 1000, 10000, 10000)
     array_types = (avg_rand_array_sort_and_time, avg_sorted_array_sort_and_time, avg_half_sorted_array_sort_and_time)
 
     # (str(sort_func).split()[1] + ' ' + "(Average Runtime in Milliseconds): ").ljust(LJUST_SPACING - len(str(milliseconds).split('.')[0]), ' ') + \
