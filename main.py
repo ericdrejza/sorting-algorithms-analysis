@@ -17,7 +17,7 @@ parser.add_argument('-a', '--all', dest='all_sorts', action='store_const',
                     const=True, default=False)
 parser.add_argument('--avg', '--averages', dest='averages', action='store_const',
                     const=True, default=False)
-parser.add_argument('--half-sorted', dest='half_sorted_sorts', action='store_const',
+parser.add_argument('--hs', '--half-sorted', dest='half_sorted_sorts', action='store_const',
                     const=True, default=False)
 parser.add_argument('-s', '--sorted', dest='sorted_sorts', action='store_const',
                     const=True, default=False)
