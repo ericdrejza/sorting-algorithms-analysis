@@ -10,20 +10,23 @@ def randArray(size, lowerBound, upperBound):
     e * 10000
   return a
 
+def halfSortedArray(size, upperBound):
+  a = list(range(size//2))
+  b = [random.randint(size//2 + 1, upperBound) for _ in range(size//2)]
+  a.extend(b)
+  return a
+
+def randHalf(a, upperBound):
+  n = len(a)
+  for i in range(n//2, n):
+    a[i] = random.randint(n//2 + 1, upperBound)
+
 if __name__ == "__main__":
     # parser = argparse.ArgumentParser()
     # args = parser.parse_args()
-    args = sys.argv
-    print(args)
-    print(len(args))
-
-    if len(args) > 2:
-      print("Too many arguments")
-      exit
-    elif len(args) == 1:
-      size = int(input("How many elements? "))
-    else:
-      size = int(args[1])
-
-    array = randArray(size, 0, 100)
-    print(array)
+    a = halfSortedArray(10, 100)
+    print("half-sorted: " + str(a))
+    a.sort()
+    print("sorted: " + str(a))
+    randHalf(a, 100)
+    print("half-sorted: " + str(a))
