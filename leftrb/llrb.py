@@ -339,5 +339,11 @@ class LeftRB(BinarySearchTree, object):
         self.root = self.root._delete_max()
         self.root.color = BLACK
  
- 
+def leftrb_sort(array):
+    llrb = LeftRB()
+    for i in range(0, len(array)):
+        llrb.insert(array[i])
+    array.clear()
+    llrb.in_order_traveral(llrb.root, array)
+
 del BinarySearchTree

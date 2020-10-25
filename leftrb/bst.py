@@ -93,3 +93,18 @@ class BinarySearchTree(object):
         """
         self.root = self.Node(key, value) if self.root is None else self.root.insert(key, value)
  
+    def in_order_traveral(self, node, array):
+        if self.root == None:
+            print("Tree is empty")
+            return
+        
+        # Go Left
+        if node.left != None:
+            self.in_order_traveral(node.left, array)
+        
+        # Add current node value to the sorted array
+        array.append(node.key)
+
+        # Go Right
+        if node.right != None:
+            self.in_order_traveral(node.right, array)
