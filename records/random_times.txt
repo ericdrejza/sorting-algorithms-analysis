@@ -6,14 +6,14 @@ Repitions per algorithm: 100
 Number of elements in array: 10
 Lower Bound: 0; Upper Bound: 99
 
-bubblesort(Average Runtime in Milliseconds): 0.006ms
-insertion_sort(Average Runtime in Milliseconds): 0.003ms
-selection_sort(Average Runtime in Milliseconds): 0.004ms
-mergesort(Average Runtime in Milliseconds): 0.008ms
+bubblesort(Average Runtime in Milliseconds):          0.006ms
+insertion_sort(Average Runtime in Milliseconds):      0.003ms
+selection_sort(Average Runtime in Milliseconds):      0.004ms
+mergesort(Average Runtime in Milliseconds):           0.008ms
 mergesort_insertion(Average Runtime in Milliseconds): 0.009ms
-heapsort(Average Runtime in Milliseconds): 0.012ms
-bst_sort(Average Runtime in Milliseconds): 0.009ms
-leftrb_sort(Average Runtime in Milliseconds): 0.048ms
+heapsort(Average Runtime in Milliseconds):            0.012ms
+bst_sort(Average Runtime in Milliseconds):            0.009ms
+leftrb_sort(Average Runtime in Milliseconds):         0.048ms
 
 -------------------------------------------------------------------------------
 Average Runtime of Each Sorting Algorithm:
@@ -22,14 +22,14 @@ Repitions per algorithm: 100
 Number of elements in array: 100
 Lower Bound: 0; Upper Bound: 999
 
-bubblesort(Average Runtime in Milliseconds): 0.5ms
-insertion_sort(Average Runtime in Milliseconds): 0.171ms
-selection_sort(Average Runtime in Milliseconds): 0.172ms
-mergesort(Average Runtime in Milliseconds): 0.135ms
+bubblesort(Average Runtime in Milliseconds):          0.5ms
+insertion_sort(Average Runtime in Milliseconds):      0.171ms
+selection_sort(Average Runtime in Milliseconds):      0.172ms
+mergesort(Average Runtime in Milliseconds):           0.135ms
 mergesort_insertion(Average Runtime in Milliseconds): 0.131ms
-heapsort(Average Runtime in Milliseconds): 0.157ms
-bst_sort(Average Runtime in Milliseconds): 0.12ms
-leftrb_sort(Average Runtime in Milliseconds): 0.869ms
+heapsort(Average Runtime in Milliseconds):            0.157ms
+bst_sort(Average Runtime in Milliseconds):            0.12ms
+leftrb_sort(Average Runtime in Milliseconds):         0.869ms
 
 -------------------------------------------------------------------------------
 Average Runtime of Each Sorting Algorithm:
@@ -38,14 +38,14 @@ Repitions per algorithm: 100
 Number of elements in array: 1000
 Lower Bound: 0; Upper Bound: 9999
 
-bubblesort(Average Runtime in Milliseconds): 61.11ms
-insertion_sort(Average Runtime in Milliseconds): 21.121ms
-selection_sort(Average Runtime in Milliseconds): 20.282ms
-mergesort(Average Runtime in Milliseconds): 1.784ms
+bubblesort(Average Runtime in Milliseconds):         61.11ms
+insertion_sort(Average Runtime in Milliseconds):     21.121ms
+selection_sort(Average Runtime in Milliseconds):     20.282ms
+mergesort(Average Runtime in Milliseconds):           1.784ms
 mergesort_insertion(Average Runtime in Milliseconds): 1.747ms
-heapsort(Average Runtime in Milliseconds): 2.107ms
-bst_sort(Average Runtime in Milliseconds): 1.72ms
-leftrb_sort(Average Runtime in Milliseconds): 13.026ms
+heapsort(Average Runtime in Milliseconds):            2.107ms
+bst_sort(Average Runtime in Milliseconds):            1.72ms
+leftrb_sort(Average Runtime in Milliseconds):        13.026ms
 
 -------------------------------------------------------------------------------
 Average Runtime of Each Sorting Algorithm:
@@ -54,11 +54,11 @@ Repitions per algorithm: 10
 Number of elements in array: 10000
 Lower Bound: 0; Upper Bound: 99999
 
-bubblesort(Average Runtime in Milliseconds): 872.154ms
-insertion_sort(Average Runtime in Milliseconds): 271.338ms
-selection_sort(Average Runtime in Milliseconds): 127.377ms
-mergesort(Average Runtime in Milliseconds): 23.79ms
+bubblesort(Average Runtime in Milliseconds):         872.154ms
+insertion_sort(Average Runtime in Milliseconds):     271.338ms
+selection_sort(Average Runtime in Milliseconds):     127.377ms
+mergesort(Average Runtime in Milliseconds):           23.79ms
 mergesort_insertion(Average Runtime in Milliseconds): 23.992ms
-heapsort(Average Runtime in Milliseconds): 27.392ms
-bst_sort(Average Runtime in Milliseconds): 23.311ms
-leftrb_sort(Average Runtime in Milliseconds): 187.564ms
+heapsort(Average Runtime in Milliseconds):            27.392ms
+bst_sort(Average Runtime in Milliseconds):            23.311ms
+leftrb_sort(Average Runtime in Milliseconds):        187.564ms
