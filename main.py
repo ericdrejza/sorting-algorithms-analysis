@@ -14,27 +14,33 @@ from leftrb.llrb import leftrb_sort
 #************** ARGUMENTS ******************
 parser = argparse.ArgumentParser(description='Sorting Algorithms')
 parser.add_argument('-a', '--all', dest='all_sorts', action='store_const',
-                    const=True, default=False, help='Run all array types on all sorting algorithms')
+                    const=True, default=False, help='Run all array types on all sorting algorithms',
+                    help='Run all sorting algorithms on all array types (random, half sorted, and sorted) and get their average runtimes for specified array sizes')
 parser.add_argument('-r', '--rand', '--random', dest='random', action='store_const',
-                    const=True, default=False)
+                    const=True, default=False,
+                    help='Find the average runtimes for each sorting algorithm on random arrays of the specified size')
 parser.add_argument('-f', '--full', '--full-run', dest='full_run', action='store_const',
-                    const=True, default=False)
+                    const=True, default=False,
+                    help='Find the average runtimes for each sorting algorithm on each type of array (random, half sorted, sorted) for various sizes (10, 100, 1000, 10000)')
 parser.add_argument('--hs', '--half-sorted', dest='half_sorted_sorts', action='store_const',
-                    const=True, default=False)
+                    const=True, default=False
+                    help='Find the average runtimes for each sorting algorithm on half sorted arrays of the specified size')
 parser.add_argument('-s', '--sorted', dest='sorted_sorts', action='store_const',
-                    const=True, default=False)
+                    const=True, default=False,
+                    help='Find the average runtimes for each sorting algorithm on sorted arrays of the specified size')
 parser.add_argument('-t', '--tests', dest='tests', action='store_const',
-                    const=True, default=False)
+                    const=True, default=False,
+                    help='Get runtimes for each sorting algorithm on random arrays of the specified size and see the sorted array')
 
 parser.add_argument('-n', '--num_elements', metavar='N', dest='num_elements', type=int,
                     help='Set the number of elements in the list')
 parser.add_argument('--reps', metavar='R', dest='num_reps', type=int,
-                    help='Sets the number of repitions per sort')
+                    help='Sets the number of repitions per sort.  The higher the number of repitions, the closer to the true average you will be')
 
 args = parser.parse_args()
 
 if len(sys.argv) == 1:
-    args.all_sorts = True
+    args.full_run = True
 
 LJUST_SPACING = 64
 
@@ -295,6 +301,8 @@ if args.full_run:
     else:
         REPS_FULL = args.num_reps
     LOWER_BOUND_FULL = 0
+
+    print("Repitions per sort: " + str(REPS_FULL) + '\n')
     
     sys.setrecursionlimit(10**6)
 
@@ -306,14 +314,18 @@ if args.full_run:
     #     str(milliseconds).split('.')[0] + '.' + str(milliseconds).split('.')[1].ljust(3, '0') + "ms"
 
     SIZE_LJUST = len("SIZE") + 10
-    RAND_ARRAY_LJUST = len("RANDOM") + 10
-    HALF_SORTED_ARRAY_LJUST = len("HALF")+ 10
-    SORTED_ARRAY_LJUST = len("SORTED") + 10
+    RAND_ARRAY_LJUST = len("RANDOM (ms)") + 5
+    HALF_SORTED_ARRAY_LJUST = len("HALF SORTED (ms)")+ 5
+    SORTED_ARRAY_LJUST = len("FULL SORTED (ms)") + 5
+    RATIO_LJUST = len("ACTUAL/PRECEDING") + 15
 
     for sort in sorts:
         print(str(sort).split()[1] + ":\n" + \
-            "SIZE".ljust(SIZE_LJUST) + "RANDOM".ljust(RAND_ARRAY_LJUST) + \
-                "HALF".ljust(HALF_SORTED_ARRAY_LJUST) + "SORTED".ljust(SORTED_ARRAY_LJUST))
+            "SIZE".ljust(SIZE_LJUST) + "RANDOM (ms)".ljust(RAND_ARRAY_LJUST) + "ACTUAL/PRECEDING".ljust(RATIO_LJUST) +\
+                "HALF SORTED (ms)".ljust(HALF_SORTED_ARRAY_LJUST) + "ACTUAL/PRECEDING".ljust(RATIO_LJUST) + \
+                    "FULL SORTED (ms)".ljust(SORTED_ARRAY_LJUST) + "ACTUAL/PRECEDING")
+
+        PRECEDING = [0, 0, 0]
 
         for size in sizes:
             UPPER_BOUND_FULL = size * 10 -1
@@ -323,17 +335,43 @@ if args.full_run:
             # RANDOM ARRAY
             milliseconds = avg_rand_array_sort_and_time(sort, size, REPS_FULL, LOWER_BOUND_FULL, UPPER_BOUND_FULL)[0]
             # print(milliseconds)
-            string = string + (str(milliseconds).split('.')[0] + '.' + str(milliseconds).split('.')[1].ljust(3, '0') + ' ').ljust(RAND_ARRAY_LJUST)
+            string = string + (str(milliseconds).split('.')[0] + '.' + str(milliseconds).split('.')[1].ljust(3, '0')).ljust(RAND_ARRAY_LJUST)
             
+            # RANDOM ARRAY: ACTUAL / PRECEDING
+            if (PRECEDING[0] != 0):
+                ratio = round(milliseconds / PRECEDING[0], 1)
+            else:
+                ratio = "---"
+            PRECEDING[0] = milliseconds
+            string = string + str(ratio).ljust(RATIO_LJUST)
+
+
             # HALF SORTED
             milliseconds  = avg_half_sorted_array_sort_and_time(sort, size, REPS_FULL, UPPER_BOUND_FULL)[0]
             # print(milliseconds)
             string = string + (str(milliseconds).split('.')[0] + '.' + str(milliseconds).split('.')[1].ljust(3, '0') + ' ').ljust(HALF_SORTED_ARRAY_LJUST)
             
+            # HALF SORTED ARRAY: ACTUAL / PRECEDING 
+            if (PRECEDING[1] != 0):
+                ratio = round(milliseconds / PRECEDING[1], 1)
+            else:
+                ratio = "---"
+            PRECEDING[1] = milliseconds
+            string = string + str(ratio).ljust(RATIO_LJUST)
+
+
             # SORTED
             milliseconds = avg_sorted_array_sort_and_time(sort, size, REPS_FULL)[0]
             # print(milliseconds)
             string = string + (str(milliseconds).split('.')[0] + '.' + str(milliseconds).split('.')[1].ljust(3, '0')).ljust(SORTED_ARRAY_LJUST)
+
+            # SORTED ARRAY: ACTUAL / PRECEDING 
+            if (PRECEDING[2] != 0):
+                ratio = round(milliseconds / PRECEDING[2], 1)
+            else:
+                ratio = "---"
+            PRECEDING[2] = milliseconds
+            string = string + str(ratio)
 
             print(string)
         
