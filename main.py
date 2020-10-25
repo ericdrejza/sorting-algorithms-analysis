@@ -7,6 +7,7 @@ from insertion_sort import insertion_sort
 from selection_sort import selection_sort
 from mergesort import mergesort, mergesort_insertion
 from heapsort import heapsort
+from bst_sort import bst_sort
 
 #************** ARGUMENTS ******************
 parser = argparse.ArgumentParser(description='Sorting Algorithms')
@@ -178,7 +179,8 @@ if args.all_sorts or args.tests:
     
     # BST Sort
     a = randArray(NUM_ELEMENTS_TEST, LOWER_BOUND_TEST, UPPER_BOUND_TEST)
-    # TODO: Add BST sort call
+    sort_and_time(a, bst_sort, PRINT_TEST)
+    print(str(a) + "\n")
     
     # LLRB Sort
     a = randArray(NUM_ELEMENTS_TEST, LOWER_BOUND_TEST, UPPER_BOUND_TEST)
