@@ -46,11 +46,13 @@ optional arguments:
 ***************** CONCLUSIONS AND FINDINGS *****************
 My findings are kept in records/sort_analysis.txt and contains a table similar
 to the example giving in lecture slide 6c, but this is txt form (which I hope is ok).
-I figured it would be could to create a table from code rather than copy it into excel
-each time I ran it.
+
+This was a result of my own added challenge question/effort which was "how do I create a nice
+looking table of my findings on my own without the use of excel?" and my implementation
+is my answer to that.  This way someone wouldn't have to copy it over to excel each time
+someone runs it to get the ratios of Actual/Preceding.
 
 sorting-algorithms-analysis/records/sort_analysis.txt
-
 
 ***************** CITINGS AND SOURCES *****************
 I used the implementation of left leaning red black trees by Peter Hillerström
