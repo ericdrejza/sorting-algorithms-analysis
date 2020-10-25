@@ -34,7 +34,8 @@ optional arguments:
   -s, --sorted          Find the average runtimes for each sorting algorithm
                         on sorted arrays of the specified size
   -t, --tests           Get runtimes for each sorting algorithm on random
-                        arrays of the specified size and see the sorted array
+                        arrays of the specified size and check if the array is
+                        sorted
   -n N, --num_elements N
                         Set the number of elements in the list
   --reps R              Sets the number of repitions per sort. The higher the
